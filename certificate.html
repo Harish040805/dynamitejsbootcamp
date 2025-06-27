@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Certificate of Completion</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  body {
+    background: #f7f7f7;
+    font-family: 'Georgia', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 10px 60px;
+    min-height: 100vh;
+  }
+  .name-form {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    width: 1200px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .name-label {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .name-input {
+    flex-grow: 2;
+    padding: 8px 10px;
+    font-size: 16px;
+    border: 2px solid #ffd700;
+    border-radius: 6px;
+    outline-offset: 2px;
+    transition: border-color 0.3s;
+  }
+  .generate-btn, .download-btn {
+    padding: 8px 12px;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    background-color: #ffd700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex-grow: 0;
+    width: auto;
+  }
+  .generate-btn:hover, .download-btn:hover {
+    background-color: #e6c200;
+  }
+  .outer-border {
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .inner-border {
+    border: 8px solid #007BFF;
+    background-color: white;
+    width: 800px;
+    max-width: 90vw;
+    height: 600px;
+    padding: 50px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .bootcamp-title {
+    color: #032B44;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .certificate-title {
+    color: #032B44;
+    font-size: 36px;
+    margin-top: 50px;
+  }
+  .awarded {
+    font-size: 20px;
+    margin-top: 80px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 20px;
+  }
+  .name-display {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 100px;
+    margin-top: 20px;
+  }
+  .description {
+    font-size: 18px;
+    text-align: left;
+    margin-left: 20px;
+    margin-top: 30px;
+    max-width: 600px;
+  }
+</style>
+</head>
+<body>
+  <h1>Dynamite Front-End Web Development Online Bootcamp</h1>
+<form id="nameForm" class="name-form" autocomplete="off">
+  <label for="nameInput" class="name-label">Enter your name to generate certificate:</label>
+  <input type="text" id="nameInput" class="name-input" placeholder="Your full name" required />
+  <button type="submit" class="generate-btn">Generate Certificate</button>
+  <button type="button" class="download-btn" id="downloadBtn">Download Certificate</button>
+</form>
+<div class="outer-border" role="region" aria-label="Certificate" id="certificateArea">
+  <div class="inner-border">
+    <h2 class="bootcamp-title">Dynamite JS Bootcamp</h2>
+    <h1 class="certificate-title">Certificate of Completion</h1>
+    <div class="awarded">Awarded to</div>
+    <div class="name-display" id="name">{name}</div>
+    <div class="description">
+      This is to certify that <span id="name-text">{name}</span> successfully completed the 
+      <span id="course">Front-End Web Development</span> virtual bootcamp.
+    </div>
+  </div>
+</div>
+<script>
+  const courseName = "Front-End Web Development";
+  const nameEl = document.getElementById("name");
+  const nameTextEl = document.getElementById("name-text");
+  const courseEl = document.getElementById("course");
+  const form = document.getElementById("nameForm");
+  const input = document.getElementById("nameInput");
+  const downloadBtn = document.getElementById("downloadBtn");
+  const certificateArea = document.getElementById("certificateArea");
+  courseEl.textContent = courseName;
+  function loadName() {
+    const savedName = localStorage.getItem("certificateName");
+    if (savedName) {
+      updateCertificate(savedName);
+      input.value = savedName;
+    }
+  }
+  function updateCertificate(name) {
+    nameEl.textContent = name;
+    nameTextEl.textContent = name;
+  }
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const enteredName = input.value.trim();
+    if (!enteredName) {
+      alert("Please enter your name.");
+      return;
+    }
+    updateCertificate(enteredName);
+    localStorage.setItem("certificateName", enteredName);
+  });
+  downloadBtn.addEventListener("click", () => {
+    html2canvas(certificateArea).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "Certificate.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+  });
+  loadName();
+</script>
+</body>
+</html>
