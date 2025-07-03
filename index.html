@@ -128,43 +128,47 @@
   </div>
 </div>
 <script>
-  const nameEl = document.getElementById("name");
-  const nameTextEl = document.getElementById("name-text");
-  const form = document.getElementById("nameForm");
-  const input = document.getElementById("nameInput");
-  const downloadBtn = document.getElementById("downloadBtn");
-  const certificateArea = document.getElementById("certificateArea");
-  courseEl.textContent = courseName;
-  function loadName() {
-    const savedName = localStorage.getItem("certificateName");
-    if (savedName) {
-      updateCertificate(savedName);
-      input.value = savedName;
-    }
+const nameEl = document.getElementById("name");
+const nameTextEl = document.getElementById("name-text");
+const form = document.getElementById("nameForm");
+const input = document.getElementById("nameInput");
+const downloadBtn = document.getElementById("downloadBtn");
+const certificateArea = document.getElementById("certificateArea");
+
+function loadName() {
+  const savedName = localStorage.getItem("certificateName");
+  if (savedName) {
+    updateCertificate(savedName);
+    input.value = savedName;
   }
-  function updateCertificate(name) {
-    nameEl.textContent = name;
-    nameTextEl.textContent = name;
+}
+
+function updateCertificate(name) {
+  nameEl.textContent = name;
+  nameTextEl.textContent = name;
+}
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const enteredName = input.value.trim();
+  if (!enteredName) {
+    alert("Please enter your name.");
+    return;
   }
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const enteredName = input.value.trim();
-    if (!enteredName) {
-      alert("Please enter your name.");
-      return;
-    }
-    updateCertificate(enteredName);
-    localStorage.setItem("certificateName", enteredName);
+  updateCertificate(enteredName);
+  localStorage.setItem("certificateName", enteredName);
+});
+
+downloadBtn.addEventListener("click", () => {
+  html2canvas(certificateArea).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "Certificate.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
   });
-  downloadBtn.addEventListener("click", () => {
-    html2canvas(certificateArea).then(canvas => {
-      const link = document.createElement("a");
-      link.download = "Certificate.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    });
-  });
-  loadName();
+});
+
+loadName();
 </script>
 </body>
 </html>
