@@ -79,7 +79,7 @@ form.addEventListener("submit", e => {
 downloadBtn.addEventListener("click", () => {
   html2canvas(certificateArea).then(canvas => {
     const link = document.createElement("a");
-    link.download = "Certificate.png";
+    link.download = "Dynamitecertificate.png";
     link.href = canvas.toDataURL("image/png");
     link.click();
   });
