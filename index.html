@@ -102,9 +102,18 @@
     margin-top: 30px;
     max-width: 600px;
   }
+.logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}  
 </style>
 </head>
 <body>
+<img src="logo-url-here" alt="Harish Creations Logo" class="logo">  
   <h2>Harish Creations</h2>
   <h1>Dynamite Front-End Web Development Online Bootcamp</h1>
 <form id="nameForm" class="name-form" autocomplete="off">
@@ -139,7 +148,6 @@ const form = document.getElementById("nameForm");
 const input = document.getElementById("nameInput");
 const downloadBtn = document.getElementById("downloadBtn");
 const certificateArea = document.getElementById("certificateArea");
-
 function loadName() {
   const savedName = localStorage.getItem("certificateName");
   if (savedName) {
@@ -147,12 +155,10 @@ function loadName() {
     input.value = savedName;
   }
 }
-
 function updateCertificate(name) {
   nameEl.textContent = name;
   nameTextEl.textContent = name;
 }
-
 form.addEventListener("submit", e => {
   e.preventDefault();
   const enteredName = input.value.trim();
@@ -163,7 +169,6 @@ form.addEventListener("submit", e => {
   updateCertificate(enteredName);
   localStorage.setItem("certificateName", enteredName);
 });
-
 downloadBtn.addEventListener("click", () => {
   html2canvas(certificateArea).then(canvas => {
     const link = document.createElement("a");
@@ -172,7 +177,6 @@ downloadBtn.addEventListener("click", () => {
     link.click();
   });
 });
-
 loadName();
 </script>
 </body>
