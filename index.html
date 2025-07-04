@@ -64,9 +64,22 @@
   .inner-border {
     border: 8px solid #007BFF;
     background-color: white;
-    width: 1123px; /* A4 width in pixels at 96dpi */
-    height: 794px; /* A4 height in pixels at 96dpi */
-    padding: 50px;
+    width: 1123px;
+    height: 850px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .innerm-border {
+    border: 6px solid #007BFF;
+    background-color: white;
+    width: 1200px;
+    height: 810px;
+    padding: 20px;
     box-sizing: border-box;
     text-align: center;
     position: relative;
@@ -99,16 +112,17 @@
   }
   .description {
     font-size: 23px;
-    margin: 20px auto;
-    max-width: 600px;
+    margin: 10px auto;
+    max-width: 750px;
   }
   .logo {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
     border-radius: 50%;
     border: 2px solid #007BFF;
     margin: 0 auto 10px;
+    filter: grayscale(100%) brightness(1.2) contrast(1.3);
   }
   .signatures {
     display: flex;
@@ -117,6 +131,14 @@
     font-size: 24px;
     color: #555;
     padding: 0 40px;
+  }
+  .logo2 {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid #007BFF;
+    margin: 0 auto 10px;
   }
 </style>
 </head>
@@ -129,28 +151,35 @@
   <button type="submit" class="generate-btn">Generate Certificate</button>
   <button type="button" class="download-btn" id="downloadBtn">Download Certificate</button>
 </form>
+
 <div class="outer-border" role="region" aria-label="Certificate" id="certificateArea">
   <div class="inner-border">
-    <img src="https://avatars.githubusercontent.com/u/188087585?v=4" alt="Harish Creations Logo" class="logo">  
-    <div class="bootcamp-title">Harish Creations</div>
-    <div class="certificate-title">Certificate of Completion</div>
-    <div class="course-title">Dynamite JS Bootcamp</div>
-    <br><br>
-    <div class="awarded">Awarded to</div>
-    <div class="name-display" id="name">{name}</div>
-    <div class="description">
-      This is to certify that <span id="name-text">{name}</span> has successfully completed the four days virtual bootcamp on <br>
-      <b>Front-End Web Development</b><br>
-      conducted from 30 June to 03 July 2025,<br>
-      organized by Harish Creations, Chennai - 600 054.
-    </div>
-    <br>
-    <div class="signatures">
-      <p>Signature of the Founder</p>
-      <p>Signature of the Coordinator</p>
+    <div class="innerm-border">
+      <br><br>
+      <img src="https://avatars.githubusercontent.com/u/188087585?v=4" alt="Harish Creations Logo" class="logo">  
+      <div class="bootcamp-title">Harish Creations</div>
+      <div class="certificate-title">Certificate of Completion</div>
+      <div class="course-title">Dynamite Front-End Web Development Online Bootcamp</div>
+      <br>
+      <div class="awarded">Awarded to</div>
+      <div class="name-display" id="name">{name}</div>
+      <br>
+      <div class="description">
+        This is to certify that <span id="name-text">{name}</span> has successfully completed <br> <b>Front-End Web Development</b> <br> four days virtual bootcamp
+        conducted from 30 June to 03 July 2025, organized by Harish Creations, Chennai - 600 054.
+      </div>
+      <br><br><br><br><br>
+      <br><br>
+      <div style="display: flex; justify-content: center; margin-top: 20px;">
+          <p>Signature of the Founder</p>
+          <img src="https://avatars.githubusercontent.com/u/188087585?v=4" alt="Middle Logo" class="logo2">
+          <p>Signature of the Coordinator</p>
+      </div>
+      </div>          
     </div>
   </div>
 </div>
+
 <script>
 const nameEl = document.getElementById("name");
 const nameTextEl = document.getElementById("name-text");
@@ -158,6 +187,7 @@ const form = document.getElementById("nameForm");
 const input = document.getElementById("nameInput");
 const downloadBtn = document.getElementById("downloadBtn");
 const certificateArea = document.getElementById("certificateArea");
+
 function loadName() {
   const savedName = localStorage.getItem("certificateName");
   if (savedName) {
