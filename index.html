@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Certificate of Completion</title>
+<title>DAS: Certificate of Completion</title>
 <link rel="stylesheet" href="style.css">  
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
   <h2>Harish Creations</h2>
-  <h1>Dynamite Front-End Web Development Online Bootcamp</h1>
+  <h1>DAS: DrawalgoSolve</h1>
 <form id="nameForm" class="name-form" autocomplete="off">
   <label for="nameInput" class="name-label">Enter your name to generate certificate:</label>
   <input type="text" id="nameInput" class="name-input" placeholder="Your full name" required />
   <button type="submit" class="generate-btn">Generate Certificate</button>
   <button type="button" class="download-btn" id="downloadBtn">Download Certificate</button>
 </form>
-
 <div class="outer-border" role="region" aria-label="Certificate" id="certificateArea">
   <div class="inner-border">
     <div class="innerm-border">
@@ -24,35 +23,28 @@
       <img src="https://harish040805.github.io/dynamitejsbootcamp/harishcreationslogo.jpg" alt="Harish Creations Logo" class="logo">  
       <div class="bootcamp-title">Harish Creations</div>
       <div class="certificate-title">Certificate of Completion</div>
-      <div class="course-title">Dynamite Front-End Web Development Online Bootcamp</div>
       <br>
-      <div class="awarded">Awarded to</div>
+      <div class="awarded">This is to certify that</div>
       <div class="name-display" id="name">{name}</div>
       <br>
       <div class="description">
-        This is to certify that <span id="name-text">{name}</span> has successfully completed <br> <b>Front-End Web Development</b> <br> four days virtual bootcamp
-        conducted from 30 June to 03 July 2025, organized by Harish Creations, Chennai - 600 054.
+        has successfully completed
+        <div class="course-title" style="font-size: 28px; font-weight: bold; margin: 10px 0;">DAS: DrawalgoSolve - 400 Modules</div>
+        on
+        <div class="date-display" style="font-weight: bold; margin: 10px 0;">12-Apr-2026</div>
       </div>
-      <br><br><br>
-<div class="signatures">
-  <div style="text-align: center; margin-right: 50px;">
-    <img src="https://harish040805.github.io/newharishresume/harishsign.jpeg" style="height: 70px; width: 200px;">
-    <br>
-    <p>Signature of the Founder</p>
-  </div>
-  <div style="text-align: center; margin-left: 50px;">
-    <br>
-    <p></p>
-  </div>
-</div>
-<br><br><br><br>
-        <div class="frojio"></div>
+      <br><br>
+      <div class="signatures" style="display: flex; justify-content: center; align-items: center;">
+        <div style="text-align: center;">
+          <img src="https://harish040805.github.io/newharishresume/harishsign.jpeg" style="height: 70px; width: 200px;">
+          <br>
+          <p>Signature of the Founder</p>
+        </div>
       </div>
-      </div>        
+      <br><br>
     </div>
   </div>
 </div>
-
 <script>
 const nameEl = document.getElementById("name");
 const nameTextEl = document.getElementById("name-text");
